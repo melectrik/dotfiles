@@ -6,5 +6,3 @@ if [[ -f ~/.bashrc ]] ; then
 	. ~/.bashrc
 fi
 
-
-PATH="/home/mt/bin:${PATH}"
