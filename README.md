@@ -1,4 +1,6 @@
-# Dependencies
+# My Dotfiles
+
+## Dependencies
 
 * awesome
 * gimp
