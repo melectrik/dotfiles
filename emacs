@@ -1,20 +1,26 @@
+(package-initialize)
+
+(server-start)
+
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(display-battery-mode t)
+ '(display-time-mode t)
  '(global-display-line-numbers-mode t)
  '(save-place t)
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(x-gtk-show-hidden-files t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
-(server-start)
+(custom-set-faces)
+
+;;; MT Themes ^
+;;; Src: https://github.com/emacs-jp/replace-colorthemes
+(add-to-list 'custom-theme-load-path
+             (file-name-as-directory "~/emacs/emacs_themes/"))
+
+;; Load your theme
+(load-theme 'infodoc t t)
+(enable-theme 'infodoc)
+;;; MT Themes $
+
