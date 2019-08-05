@@ -1,0 +1,48 @@
+[user]
+	email = mtemimi@gmail.com
+	name = Mel Te
+
+[push]
+	default = current
+
+[alias]
+
+lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+lg3 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+lg = !"git lg3"
+
+ignore = update-index --assume-unchanged
+unignore = update-index --no-assume-unchanged
+
+
+; Src: http://nathanhoad.net/how-to-colours-in-git
+
+[color]
+  ui = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[merge]
+	ff = false
+
+[filter "rcs-keywords"]
+	clean  = ~/.git_filters/rcs-keywords.clean
+	smudge = ~/.git_filters/rcs-keywords.smudge %f
+[core]
+	excludesfile = ~/.gitignore_global
