@@ -1,0 +1,4 @@
+function get_hdmi()
+{
+	echo $(xrandr | grep HDMI | grep connected | grep -v disconnected | awk '{print $1}')
+}

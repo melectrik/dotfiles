@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/usr/bin/xscreensaver-command -lock

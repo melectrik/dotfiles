@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Src: https://a3nm.net/blog/xrandr.html
+
+. bin/awesome/.display.lib
+
+export MODE=${1}
+
+# Outputs:
+export OUTPUT_HDMI=$(get_hdmi) # "HDMI-1"|"HDMI-2"
+export OUTPUT_NOTEBOOK="eDP-1"
+
+
+function mirroring()
+{
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --auto
+}
+
+function notebook()
+{
+    change_files_target_screen 1
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --off
+    /usr/bin/xrandr --output eDP-1 --auto
+}
+
+function change_files_target_screen()
+{
+    export index_screen=${1}
+    cd ~/.config/awesome/
+    rm rc.target_screen.lua ;
+    ln -s rc.target_screen_${index_screen}.lua rc.target_screen.lua
+    cd -
+}
+
+function both()
+{
+    change_files_target_screen 2
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --auto
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --left-of  eDP-1
+}
+
+function hdmi()
+{
+    /usr/bin/xrandr --output --auto
+}
+
+
+function same()
+{
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --same-as eDP-1
+}
+
+function help_display()
+{
+    echo "Argument is missing. Please provide onne of notebook|hdmi|both|mirroring";
+}
+
+# MAIN
+if [ -z ${MODE} ]; then
+    help_display
+    exit 1;
+
+elif [[ ${MODE} == "notebook" ]]; then
+    notebook
+    
+elif [[ ${MODE} == "both" ]]; then
+    both
+    
+elif [[ ${MODE} == "mirroring" ]]; then
+    mirroring
+
+elif [[ ${MODE} == "same" ]]; then
+    same
+
+fi
+   
+exit 0
