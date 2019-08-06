@@ -5,38 +5,55 @@
 [push]
 	default = current
 
+
+[diff]
+	tool = vimdiff
+	
+[difftool]
+	prompt = false
+
 [alias]
+	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+	lg3 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-lg3 = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = !"git lg3"
 
-lg = !"git lg3"
+	ignore = update-index --assume-unchanged
+	unignore = update-index --no-assume-unchanged
 
-ignore = update-index --assume-unchanged
-unignore = update-index --no-assume-unchanged
+	st = status
+	di = diff
+	br = branch
+	co = checkout
+	pl = pull
+	ps = push
 
+	last	= log -1 HEAD
+	gr1	= log --graph --oneline
+	gr2	= log --graph --pretty
+	graph	= log --graph --pretty
+	vshow = "!f() { readonly rev=${1-HEAD}; git difftool ${rev}~ $rev; }; f"
 
 ; Src: http://nathanhoad.net/how-to-colours-in-git
-
 [color]
-  ui = auto
+	ui = auto
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+       current = yellow reverse
+       local = yellow
+       remote = green  
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+       meta = yellow bold
+       frag = magenta bold
+       old = red bold
+       new = green bold
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+       added = yellow
+       changed = green
+       untracked = cyan
 
 [merge]
 	ff = false
