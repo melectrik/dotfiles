@@ -1,0 +1,4 @@
+#!/bin/bash
+
+~/bin/awesome/display notebook
+~/bin/awesome/lock_workspace
