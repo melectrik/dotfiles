@@ -120,6 +120,13 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # U
 # MT fun stuff goes here
 [ -f ~/.byobu/prompt ] && [ -r ~/.byobu/prompt ] && . ~/.byobu/prompt   #byobu-prompt#
 
+
+# MT
+if [[ "$SSH_AUTH_SOCK" != "" ]];
+then
+    ssh-add ~/.ssh/id_*
+fi
+
 # http://thelucid.com/2008/12/02/git-setting-up-a-remote-repository-and-doing-an-initial-push/
 #function git-branch-name
 #{
