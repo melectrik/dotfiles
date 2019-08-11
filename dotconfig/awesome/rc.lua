@@ -510,19 +510,23 @@ awful.rules.rules = {
     },
 
    -- Tag misc on 1
-     { rule = { class = "Pavucontrol" },
-       properties = { screen = target_screen, tag = "1" } },
+--     { rule = { class = "Pavucontrol" },
+--       properties = { screen = target_screen, tag = "1" } },
 
    -- Tag work on 2
      { rule = { class = "Emacs" },
        properties = { screen = target_screen, tag = "2" } },
      { rule = { class = "Code" },
        properties = { screen = target_screen, tag = "2" } },
-     { rule = { class = "X-terminal-emulator" },
-       properties = { screen = target_screen, tag = "2" } },
-     { rule = { class = "Terminator" },
-       properties = { screen = target_screen, tag = "2" } },
+--     { rule = { class = "X-terminal-emulator" },
+--       properties = { screen = target_screen, tag = "2" } },
+--     { rule = { class = "Terminator" },
+--       properties = { screen = target_screen, tag = "2" } },
 
+   -- Tag on 3
+     { rule = { class = "Gimp" },
+       properties = { screen = target_screen, tag = "3" } },
+   
     -- Tag communications on 7
      { rule = { class = "Telegram" },
        properties = { screen = target_screen, tag = "7" } },
