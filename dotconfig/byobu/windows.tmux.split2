@@ -1,0 +1,4 @@
+new-session 'bash' ;
+split-window ;
+select-layout tiled ;
+select-pane -t 0

@@ -19,6 +19,8 @@ mymainmenu = awful.menu({
 	   {"Nautilus", "nautilus"},
 	   { "vifm", terminal .. " -e vifm"},
 	   { "-----------------", false},
+	   { "Term split 2", terminal .. " o-e BYOBU_WINDOWS=split2 byobu"},
+	   { "Term split 4", terminal .. " -e BYOBU_WINDOWS=split4 byobu"},
 	   {"Connect_dev", "./bin/connect_dev"},
 	   {"Connect_stage", "./bin/connect_stage"},
 	   {"Connect_prod", "./bin/connect_prod"},

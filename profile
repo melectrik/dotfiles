@@ -25,5 +25,5 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 if [ -f "$HOME/.xmodmap_ctrl_capslock" ] ; then
-   . "$HOME/.xmodmap_ctrl_capslock"
+   xmodmap "$HOME/.xmodmap_*"
 fi
