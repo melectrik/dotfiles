@@ -1,3 +1,6 @@
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (server-start)
@@ -7,6 +10,7 @@
  '(display-battery-mode t)
  '(display-time-mode t)
  '(global-display-line-numbers-mode t)
+ '(package-selected-packages (quote (lua-mode ## redtick)))
  '(save-place t)
  '(show-paren-mode t)
  '(size-indication-mode t)
