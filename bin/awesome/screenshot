@@ -2,7 +2,8 @@
 
 # TODO: convert xwd output to jpg or so
 
-SCREENSHOTS_TARGT_DIR="~/Pictures/"
+SCREENSHOTS_TARGT_DIR=${HOME}"/Pictures"
+LOG_FILE=${HOME}"/screenshot.filename.log"
 # Modes for xwd
 #MODE="-root"
 MODE=""
@@ -12,13 +13,13 @@ cd ${SCREENSHOTS_TARGT_DIR}
 FILE_NAME="Screenshot$(date +"%Y%m%d%H%M")"
 FILE_NAME="${FILE_NAME}.xwd"
 
-/usr/bin/xwd ${MODE} -out "${FILE_NAME}"
+/usr/bin/xwd ${MODE} -out "${SCREENSHOTS_TARGT_DIR}/${FILE_NAME}"
 
 export msg1="Screenshot done. File: "
-export msg2="~/Pictures/${FILE_NAME}"
+export msg2="${SCREENSHOTS_TARGT_DIR}/${FILE_NAME}"
 
 echo ${msg1} ${msg2}
 
-echo "${msg2}" > ~/screenshot.filename.log
+echo "${msg2}" > ${LOG_FILE}
 
-gimp ${FILE_NAME}
+gimp "${SCREENSHOTS_TARGT_DIR}/${FILE_NAME}"
