@@ -1,0 +1,21 @@
+export MTERM="/usr/bin/terminator"
+
+function get_credentials_machine()
+{
+  sed "${2}q;d" ${1} | awk '{ print $2 }'
+}
+
+function get_credentials_login()
+{
+  sed "${2}q;d" ${1} | awk '{ print $4 }'
+}
+
+function get_credentials_password()
+{
+  sed "${2}q;d" ${1} | awk '{ print $6 }'
+}
+
+function get_credentials_port()
+{
+  sed "${2}q;d" ${1} | awk '{ print $8 }'
+}
