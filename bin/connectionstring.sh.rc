@@ -1,0 +1,8 @@
+declare -A environments=()
+
+# Line ranges from machine based credentials file go here:
+ENV1=$(seq 41 70)
+ENV2=$(seq 81 81)
+ENV3=$(seq 2 25)
+
+export environments=([ENV1]=${ENV1} [ENV2]=${ENV2} [ENV3]=${ENV3})
