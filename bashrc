@@ -122,10 +122,10 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # U
 
 
 # MT
-if [[ "$SSH_AUTH_SOCK" != "" ]];
-then
-    ssh-add ~/.ssh/id_*
-fi
+#if [[ "$SSH_AUTH_SOCK" != "" ]];
+#then
+#    ssh-add ~/.ssh/id_*
+#fi
 
 # http://thelucid.com/2008/12/02/git-setting-up-a-remote-repository-and-doing-an-initial-push/
 #function git-branch-name
