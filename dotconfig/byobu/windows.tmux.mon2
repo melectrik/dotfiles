@@ -1,0 +1,8 @@
+new-session -n 'Mon2'
+sudo tail -f /var/log/syslog;
+split-window
+sudo tail -f /var/log/kern.log;
+split-window
+sudo tail -f /var/log/auth.log;
+select-layout even-vertical;
+select-pane -t 0;
