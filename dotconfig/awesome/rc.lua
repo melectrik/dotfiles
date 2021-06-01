@@ -510,8 +510,12 @@ awful.rules.rules = {
     },
 
    -- Tag misc on 1
---     { rule = { class = "Pavucontrol" },
---       properties = { screen = target_screen, tag = "1" } },
+     { rule = { class = "Pavucontrol" },
+       properties = { screen = target_screen, tag = "1" } },
+     { rule = { class = "keepassxc" },
+       properties = { screen = target_screen, tag = "1" } },
+     { rule = { class = "Org.gnome.Nautilus" },
+       properties = { screen = target_screen, tag = "1" } },
 
    -- Tag work on 2
      { rule = { class = "Emacs" },
@@ -526,7 +530,11 @@ awful.rules.rules = {
    -- Tag on 3
      { rule = { class = "Gimp" },
        properties = { screen = target_screen, tag = "3" } },
-   
+     { rule = { class = "Terminator" },
+       properties = { screen = target_screen, tag = "3" } },
+     { rule = { class = "X-terminal-emulator" },
+       properties = { screen = target_screen, tag = "3" } },
+
     -- Tag communications on 7
      { rule = { class = "Telegram" },
        properties = { screen = target_screen, tag = "7" } },
@@ -538,11 +546,23 @@ awful.rules.rules = {
        properties = { screen = target_screen, tag = "7" } },
      { rule = { class = "teams-for-linux" },
        properties = { screen = target_screen, tag = "7" } },
+     { rule = { class = "teams" },
+       properties = { screen = target_screen, tag = "7" } },
+     { rule = { class = "Signal" },
+       properties = { screen = target_screen, tag = "7" } },
+     { rule = { class = "Element" },
+       properties = { screen = target_screen, tag = "7" } },
 
     -- Tag firefox on 8
      { rule = { class = "Firefox" },
        properties = { screen = target_screen, tag = "8" } },
-       
+     { rule = { class = "Google-chrome" },
+       properties = { screen = target_screen, tag = "8" } },
+
+    -- Tag firefox on 9
+     { rule = { class = "defi-wallet" },
+       properties = { screen = target_screen, tag = "9" } },
+
 
 }
 -- }}}
