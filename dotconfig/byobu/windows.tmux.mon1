@@ -1,0 +1,6 @@
+new-session -n Syslog
+sudo tail -f /var/log/syslog;
+new-window -ad -n Auth
+sudo tail -f /var/log/auth.log;
+new-window -ad -n Kernel
+sudo tail -f /var/log/kern.log;

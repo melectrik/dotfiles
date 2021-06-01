@@ -1,0 +1,1 @@
+machine HOST login NAME password VALUE port NUMBER # remotehost prod-host1 remoteport 22

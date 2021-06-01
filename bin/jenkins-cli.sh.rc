@@ -1,0 +1,2 @@
+JENKINS_URL=""
+JENKINS_CLI_JAR_PATH="${HOME}/bin/jenkins-cli.jar"
