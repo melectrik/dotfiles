@@ -50,7 +50,8 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+-- terminal = "x-terminal-emulator"
+terminal = "terminator -u"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -99,7 +100,38 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+
+my_term_menu = {
+	   {"Terminator -u", "terminator -u"},
+	   { "Term split 2", terminal .. " -e BYOBU_WINDOWS=split2 byobu"},
+	   { "Term split 4", terminal .. " -e BYOBU_WINDOWS=split4 byobu"},
+	   { "Terminal", terminal },
+	   { "vifm", terminal .. " -e vifm"},
+	   {"Terminator -u", "terminator -u"}
+}
+
+my_apps_menu = {
+	   {"Code", "code"},
+	   {"Emacs", "emacs"},
+	   {"Nautilus", "nautilus"},
+	   { "-----------------", false},
+	   {"Firefox", "firefox"},
+	   {"Chrome", "google-chrome"},
+	   { "-----------------", false},
+	   {"Keepassxc", "keepassxc"},
+	   {"Dbeaver", "dbeaver"},
+	   { "-----------------", false},
+	   {"Element", "element-desktop"},
+	   {"Thunderbird", "thunderbird"},
+	   {"Telegram", "telegram-desktop"},
+	   {"Teams", "teams"},
+	   {"Signal", "signal-desktop"},
+	   {"Slack", "slack"},
+	   {"Zoom", "zoom"},
+	   { "-----------------", false}
+}
+
+my_awesome_menu = {
    { "hotkeys", function() return false, hotkeys_popup.show_help end},
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
@@ -108,7 +140,6 @@ myawesomemenu = {
 }
 
 local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
 
 if has_fdo then
     mymainmenu = freedesktop.menu.build({
@@ -516,6 +547,8 @@ awful.rules.rules = {
        properties = { screen = target_screen, tag = "1" } },
      { rule = { class = "Org.gnome.Nautilus" },
        properties = { screen = target_screen, tag = "1" } },
+     { rule = { class = "umbrello" },
+       properties = { screen = target_screen, tag = "1" } },
 
    -- Tag work on 2
      { rule = { class = "Emacs" },
@@ -544,9 +577,7 @@ awful.rules.rules = {
        properties = { screen = target_screen, tag = "7" } },
      { rule = { class = "Thunderbird" },
        properties = { screen = target_screen, tag = "7" } },
-     { rule = { class = "teams-for-linux" },
-       properties = { screen = target_screen, tag = "7" } },
-     { rule = { class = "teams" },
+     { rule = { class = "Microsoft Teams - Preview" },
        properties = { screen = target_screen, tag = "7" } },
      { rule = { class = "Signal" },
        properties = { screen = target_screen, tag = "7" } },
@@ -635,3 +666,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- awful.screen.set_auto_dpi_enabled(true)

@@ -2,3 +2,9 @@ function get_hdmi()
 {
 	echo $(xrandr | grep HDMI | grep connected | grep -v disconnected | awk '{print $1}')
 }
+
+function get_mini_display()
+{
+	echo $(xrandr | grep "eDP-1" | grep connected | grep -v disconnected | awk '{print $1}')
+}
+

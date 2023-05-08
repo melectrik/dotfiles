@@ -2,14 +2,29 @@
 
 # Src: https://a3nm.net/blog/xrandr.html
 
-. bin/awesome/.display.lib
+. ${HOME}/dotfiles/bin/awesome/.display.lib
 
 export MODE=${1}
 
 # Outputs:
 export OUTPUT_HDMI=$(get_hdmi) # "HDMI-1"|"HDMI-2"
-export OUTPUT_NOTEBOOK="eDP-1"
+export OUTPUT_NOTEBOOK="DP-1" # "eDP-1"
+export OUTPUT_MINI_DISPLAY=$(get_mini_display) # "eDP-1"
 
+#LAPTOP_RESOLUTION="1920x1200"
+##LAPTOP_RESOLUTION="3456x2160"
+LAPTOP_RESOLUTION="1600x900"
+LAPTOP_DEVICE="eDP-1"
+
+WORK_RESOLUTION="3440x1440"
+WORK_POSITION="3440x506"
+WORK_DEVICE="DP-3"
+
+HOME_RESOLUTION="800x600"
+HOME_DEVICE="DP-2"
+
+OTHER_DEVICE_1="DP-1"
+OTHER_DEVICE_2="DP-3"
 
 function mirroring()
 {
@@ -20,7 +35,7 @@ function notebook()
 {
     change_files_target_screen 1
     /usr/bin/xrandr --output ${OUTPUT_HDMI} --off
-    /usr/bin/xrandr --output eDP-1 --auto
+    /usr/bin/xrandr --output ${OUTPUT_MINI_DISPLAY} --auto
 }
 
 function change_files_target_screen()
@@ -36,18 +51,13 @@ function both()
 {
     change_files_target_screen 2
     /usr/bin/xrandr --output ${OUTPUT_HDMI} --auto
-    /usr/bin/xrandr --output ${OUTPUT_HDMI} --left-of  eDP-1
-}
-
-function hdmi()
-{
-    /usr/bin/xrandr --output --auto
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --left-of  ${OUTPUT_MINI_DISPLAY}
 }
 
 
 function same()
 {
-    /usr/bin/xrandr --output ${OUTPUT_HDMI} --same-as eDP-1
+    /usr/bin/xrandr --output ${OUTPUT_HDMI} --same-as ${OUTPUT_MINI_DISPLAY}
 }
 
 function help_display()
@@ -55,23 +65,159 @@ function help_display()
     echo "Argument is missing. Please provide onne of notebook|hdmi|both|mirroring";
 }
 
+function mini_display_as_auxiliary()
+{
+    sleep 1
+    change_files_target_screen 2
+##    /usr/bin/xrandr --output "${OUTPUT_HDMI}" --off
+##    /usr/bin/xrandr --output "HDMI-1" --off
+    /usr/bin/xrandr --output "${OUTPUT_MINI_DISPLAY}" --auto
+    sleep 1
+    /usr/bin/xrandr --output "${OUTPUT_MINI_DISPLAY}" --left-of "${OUTPUT_NOTEBOOK}"
+}
+
+
+function from_hdmi_2_mini_display()
+{
+    xrandr --output DP-1 --auto
+    xrandr --output ${OUTPUT_NOTEBOOK} --auto
+    sleep 1
+    xrandr --output HDMI-2  --off
+    sleep 1
+    xrandr --output DP-1 --left-of eDP-1
+}
+
+function work_2107()
+{
+    # Dell 34 inch 21:9 Widersreen. native: --size 3440x1440 . 1600x1200 . 2560×1080
+    # Rather set it up with arandr!
+    xrandr --output DP-1 --auto
+
+    RESOLUTION="3440x1440"
+    RATE="29.99"
+    xrandr --output HDMI-2 --size "${RESOLUTION}" --rate "${RATE}" --auto --left-of eDP-1
+}
+
+
+function from_mini_display_to_hdmi()
+{
+    #xrandr --output DP-1  --off
+    #sleep 1
+    xrandr --output HDMI-2  --auto
+    sleep 1
+    xrandr --output HDMI-2  --right-of eDP-1
+}
+
+function home()
+{
+    # from_mini_display_to_hdmi
+    ${HOME}/.screenlayout/home_hdmi2.sh
+}
+
+
+function work_2107_dell_34_21_9()
+{
+    ${HOME}/.screenlayout/work_hdm2_widescreen.sh
+}
+
+function work()
+{
+    work_2107_dell_34_21_9
+}
+
+function work_screen_primary()
+{
+    # hdmi2_widescreen_as_primary
+
+#    pkill compton
+
+    OTHER_DEVICE_1="DP-2"
+    xrandr --output ${LAPTOP_DEVICE} --mode ${LAPTOP_RESOLUTION} --pos 0x0 --rotate normal \
+       --output ${OTHER_DEVICE_1} --off \
+       --output ${OTHER_DEVICE_2} --off \
+       --output ${WORK_DEVICE} --primary --mode ${WORK_RESOLUTION} --pos ${WORK_POSITION} --rotate normal
+
+#    ~/dotfiles/bin/awesome/compton.sh
+}
+
+function work_screen_secondary()
+{
+    # hdmi2_widescreen_as_secondary.sh
+
+#    pkill compton
+
+    OTHER_DEVICE_1="DP-2"
+    xrandr --output ${LAPTOP_DEVICE} --primary --mode ${LAPTOP_RESOLUTION} --pos ${WORK_POSITION} --rotate normal \
+       --output ${OTHER_DEVICE_1} --off \
+       --output ${OTHER_DEVICE_2} --off \
+       --output ${WORK_DEVICE} --mode ${WORK_RESOLUTION} --pos 0x0 --rotate normal
+    
+#    ~/dotfiles/bin/awesome/compton.sh
+}
+
+
+function home_screen_primary()
+{
+    # home_hdmi2_as_primary
+#    pkill compton
+
+    xrandr \
+	--output ${HOME_DEVICE} --primary --mode ${HOME_RESOLUTION} --pos 0x0 --rotate normal \
+	--output ${OTHER_DEVICE_1} --off \
+	--output ${OTHER_DEVICE_2} --off \
+	--output ${LAPTOP_DEVICE} --mode ${LAPTOP_RESOLUTION} --pos 1920x0 --rotate normal
+    
+#    ~/dotfiles/bin/awesome/compton.sh
+}
+
+function home_screen_secondary()
+{
+    # home_hdmi2_as_secondary.sh
+
+#    pkill compton
+    
+    xrandr \
+	--output ${LAPTOP_DEVICE} --primary --mode ${LAPTOP_RESOLUTION} --pos 1920x0 --rotate normal \
+	--output ${OTHER_DEVICE_1} --off \
+	--output ${OTHER_DEVICE_2} --off \
+	--output ${HOME_DEVICE} --mode ${HOME_RESOLUTION} --pos 0x0 --rotate normal
+    
+#    ~/dotfiles/bin/awesome/compton.sh
+}
+
+function only_laptop()
+{
+#    pkill compton
+    
+    xrandr --output ${LAPTOP_DEVICE} --primary --mode ${LAPTOP_RESOLUTION} --pos 0x0 --rotate normal \
+       --output ${HOME_DEVICE} --off \
+       --output ${OTHER_DEVICE_1} --off \
+       --output ${OTHER_DEVICE_2} --off
+    
+#    ~/dotfiles/bin/awesome/compton.sh
+}
+
 # MAIN
 if [ -z ${MODE} ]; then
     help_display
     exit 1;
 
-elif [[ ${MODE} == "notebook" ]]; then
-    notebook
+elif [[ ${MODE} == "work_screen_primary" ]]; then
+    work_screen_primary
     
-elif [[ ${MODE} == "both" ]]; then
-    both
-    
-elif [[ ${MODE} == "mirroring" ]]; then
-    mirroring
+elif [[ ${MODE} == "work_screen_secondary" ]]; then
+    work_screen_secondary
 
-elif [[ ${MODE} == "same" ]]; then
-    same
+elif [[ ${MODE} == "home_screen_primary" ]]; then
+    home_screen_primary
+    
+elif [[ ${MODE} == "home_screen_secondary" ]]; then
+    home_screen_secondary
+
+elif [[ ${MODE} == "only_laptop" ]]; then
+    only_laptop
 
 fi
    
 exit 0
+

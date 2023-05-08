@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 # from pathlib import Path
 # dotenv_path = Path('path/to/.env')
 # load_dotenv(dotenv_path=dotenv_path)
-
+# sys.path.append(script_path + "/../t1/")
 
 """Caution: the following is indifferent to and not safe when you already did a os.chdir()"""
 script_path = os.path.dirname(os.path.realpath(__file__))
