@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=-1
+HISTFILESIZE=-1
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -138,3 +138,38 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # U
 #  if [ $branch ]; then printf "[%s]" $branch; fi
 #}
 #PS1="\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$(git-branch-prompt) \$\[\033[00m\] "
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+
+export ANSIBLE_COW_SELECTION=tux
+export ANSIBLE_NOCOWS=1
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/mt/google-cloud-sdk/path.bash.inc' ]; then . '/home/mt/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/mt/google-cloud-sdk/completion.bash.inc' ]; then . '/home/mt/google-cloud-sdk/completion.bash.inc'; fi
+
+## mt
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+. "$HOME/.cargo/env"
+export PATH=${HOME}/bin/latex_multipub/toolbox/scripts/:${PATH}
+export PATH=${HOME}/.emacs.d/bin:~/bin:${PATH}
+
+
+### ^KUBECTL KUBERNETES^ ###
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export KUBECONFIG_BASE_PATH=${HOME}/.kube
+export KUBECONFIG_FILE_LIVE="${KUBECONFIG_BASE_PATH}/config_live"
+export KUBECONFIG_FILE_EXPERIMENTAL="${KUBECONFIG_BASE_PATH}/config_experimental"
+export KUBECONFIG_CONTEXTS="${KUBECONFIG_BASE_PATH}/config_contexts"
+export KUBECONFIG="${KUBECONFIG_FILE_LIVE}:${KUBECONFIG_FILE_EXPERIMENTAL}:${KUBECONFIG_CONTEXTS}"
+## HOWTO init:
+## KUBECONFIG=$KUBECONFIG_FILE_LIVE gcloud container clusters get-credentials spitch-k8s-primary --region europe-west3 --project spitch-live
+## KUBECONFIG=$KUBECONFIG_FILE_EXPERIMENTAL gcloud container clusters get-credentials spitch-k8s-primary --region europe-west3 --project spitch-experimental
+## ADD context
+### $KUBECTL KUBERNETES$ ###
+
