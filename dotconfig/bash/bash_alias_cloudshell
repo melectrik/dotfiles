@@ -1,5 +1,8 @@
 alias k=kubectl
+alias kg="k get "
 alias kgp="k get pods"
-alias kgpow="kgp -o wide"
 alias kgs="k get services"
+alias kge="k get events"
+alias kgpow="kgp -o wide"
 alias kgsow="kgs -o wide"
+alias kgeow="k get events -o wide"
