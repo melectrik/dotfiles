@@ -45,7 +45,7 @@ cd "${script_path}"
 
     function main(){
         case ${1-usage} in
-            --install-k9s)
+            --install)
 		false
 		# install_k9s
 		# install_gh_cli
