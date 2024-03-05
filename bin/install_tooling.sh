@@ -31,7 +31,7 @@ cd "${script_path}"
     function install_k9s(){
 	local URI="https://github.com/derailed/k9s/releases/download/v0.32.1/k9s_linux_amd64.deb"
     	ofile="k9s_linux_amd64.deb"
-	wget ${URI} --output-file=${ofile}
+	wget -q ${URI} --output-file=${ofile}
 	echo dpkg -i ${ofile}
     }
 
